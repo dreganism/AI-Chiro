@@ -13,7 +13,7 @@ def get_current_user(
         raise HTTPException(status_code=401, detail="Not authenticated")
     
     token = authorization.split(" ")[1]
-    payload = decode_token(token)
+    payload = decode_token(token, expected_type="access")
     if not payload or payload.get("sub") is None:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
     
